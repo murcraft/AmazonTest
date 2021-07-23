@@ -80,4 +80,18 @@ export default class BasePage {
     await this.page.waitForLoadState('domcontentloaded')
     await this.page.screenshot({ path: `${EnvData.SCREENSHOTS_PATH}/${actualSuiteName}/${testNum}_${actualFileName}-${dateTime}.png` })
   }
+
+  async isElementPresent (elem, options = {}) {
+    options = { timeout: WAIT_TIMEOUT, ...options }
+    LoggerHelper.Debug(`Getting visibility of ${elem.description} by selector '${elem.selector}'`)
+    try {
+      return await this.page.isVisible(elem.selector, options)
+    } catch (err) {
+      throw new Error(`Element '${elem.selector}' is not found. Details: ${err.message}`)
+    }
+  }
+
+  async navigateMainPage () {
+    await this.navigatePage(EnvData.BASE_URL)
+  }
 }

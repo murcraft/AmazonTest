@@ -1,13 +1,17 @@
-import EnvData from '../testdata/EnvData'
+import { users } from '../testdata/UserData'
 import MainPage from '../src/pages/MainPage'
 import HeaderPage from '../src/pages/HeaderPage'
 import LoginPage from '../src/pages/LoginPage'
 import AccountPage from '../src/pages/account/AccountPage'
 import ConstData from '../src/lib/ConstData'
-import { users } from '../testdata/UserData'
 import LoggerHelper from '../src/lib/Logger'
 
 describe('Smoke - Login - Sign In:', () => {
+  const mainPage = new MainPage(page)
+  const headerPage = new HeaderPage(page)
+  const loginPage = new LoginPage(page)
+  const accountPage = new AccountPage(page)
+
   let counter = 0
   const accountPagesRef = [
     'Your Orders',
@@ -21,10 +25,6 @@ describe('Smoke - Login - Sign In:', () => {
     'Archived orders',
     'Your Lists'
   ]
-  const mainPage = new MainPage(page)
-  const headerPage = new HeaderPage(page)
-  const loginPage = new LoginPage(page)
-  const accountPage = new AccountPage(page)
 
   beforeEach(async () => {
     await LoggerHelper.Info(expect.getState().currentTestName)
@@ -34,14 +34,16 @@ describe('Smoke - Login - Sign In:', () => {
     await mainPage.takePageScreenshot(expect.getState().currentTestName, counter++)
   })
 
-  test('Go to main page, click login', async () => {
-    await headerPage.navigatePage(EnvData.BASE_URL)
-    await headerPage.clickLogin()
+  test('Go to main page, check user is not logged', async () => {
+    await headerPage.navigateMainPage()
+    expect(await headerPage.getUserInvitation()).toStrictEqual('Hello, Sign in')
+    expect(await mainPage.isUserNavLinkPresent()).toStrictEqual(false)
   })
 
   test('Fill in login page', async () => {
-    await loginPage.loginAsUser(users.ogulikss)
-    expect(await headerPage.getUserInvitation()).toEqual(`Hello, ${users.ogulikss.firstName}`)
+    await headerPage.clickLogin()
+    await loginPage.loginAsUser(users.ogulikss.username, users.ogulikss.pass)
+    expect(await headerPage.getUserInvitation()).toStrictEqual(`Hello, ${users.ogulikss.firstName}`)
   })
 
   test('Check account main page', async () => {
