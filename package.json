@@ -4,19 +4,35 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "argv": "0.0.2",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^27.0.6",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
+    "dateformat": "^4.5.1",
     "jest": "^27.0.6",
+    "jest-expect-message": "^1.0.2",
     "jest-html-reporters": "^2.1.6",
     "jest-playwright-preset": "^1.7.0",
-    "playwright": "^1.12.3"
+    "log4js": "^6.3.0",
+    "playwright": "^1.12.3",
+    "regenerator-runtime": "^0.13.7"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "jest-expect-message"
+    ],
+    "preset": "jest-playwright-preset"
+  },
+  "dependencies": {
+    "yargs": "^17.0.1"
   }
 }
