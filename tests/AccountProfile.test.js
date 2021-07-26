@@ -36,24 +36,24 @@ describe('Smoke - Login - Sign In:', () => {
 
   test('Go to main page, check user is not logged', async () => {
     await headerPage.navigateMainPage()
-    expect(await headerPage.getUserInvitation()).toStrictEqual('Hello, Sign in')
-    expect(await mainPage.isUserNavLinkPresent()).toStrictEqual(false)
+    expect(await headerPage.getUserInvitation(), 'Sign in invitation should be present').toStrictEqual('Hello, Sign in')
+    expect(await mainPage.isUserNavLinkPresent(), 'User navigation link should not be present').toStrictEqual(false)
   })
 
   test('Fill in login page', async () => {
     await headerPage.clickLogin()
     await loginPage.loginAsUser(users.ogulikss.username, users.ogulikss.pass)
-    expect(await headerPage.getUserInvitation()).toStrictEqual(`Hello, ${users.ogulikss.firstName}`)
+    expect(await headerPage.getUserInvitation(), 'User invitation should be present').toStrictEqual(`Hello, ${users.ogulikss.firstName}`)
   })
 
   test('Check account main page', async () => {
     await headerPage.clickAccountLists()
     const innerPagesRef = await accountPage.getAccountReferences()
-    expect(innerPagesRef).toStrictEqual(accountPagesRef)
+    expect(innerPagesRef, 'Full list of account pages should be present').toStrictEqual(accountPagesRef)
   })
 
   test('Check account profile page', async () => {
     await accountPage.clickPageRefByTitle(ConstData.ACCOUNT_PAGE_TITLE.YOUR_PROFILES)
-    expect(await accountPage.getProfileNameLabel()).toStrictEqual(users.ogulikss.firstName)
+    expect(await accountPage.getProfileNameLabel(), 'Profile name label should be present').toStrictEqual(users.ogulikss.firstName)
   })
 })

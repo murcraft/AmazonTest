@@ -33,28 +33,28 @@ describe('Smoke - Login Validation:', () => {
   test('Fill in incorrect email, check error message', async () => {
     await loginPage.fillUsername(invalidEmail)
     await loginPage.clickContinue()
-    expect(await loginPage.getErrorTitle()).toStrictEqual(errorTitle)
-    expect(await loginPage.getErrorNotification()).toStrictEqual(errorEmailMsg)
+    expect(await loginPage.getErrorTitle(), 'Error title should be shown').toStrictEqual(errorTitle)
+    expect(await loginPage.getErrorNotification(), 'Error message should be shown').toStrictEqual(errorEmailMsg)
   })
 
   test('Set correct email, check no errors', async () => {
     await loginPage.fillUsername(users.ogulikss.username)
     await loginPage.clickContinue()
-    expect(await loginPage.getErrorPresence()).toStrictEqual(false)
+    expect(await loginPage.getErrorPresence(), 'Error should disappear').toStrictEqual(false)
   })
 
   test('Fill in incorrect password, check error message', async () => {
     await loginPage.fillPassword(invalidPass)
     await loginPage.clickSignIn()
-    expect(await loginPage.getErrorTitle()).toStrictEqual(errorTitle)
-    expect(await loginPage.getErrorNotification()).toStrictEqual(errorPassMsg)
+    expect(await loginPage.getErrorTitle(), 'Error title should be shown').toStrictEqual(errorTitle)
+    expect(await loginPage.getErrorNotification(), 'Error message should be shown').toStrictEqual(errorPassMsg)
   })
 
   test('Set correct pass, check user is signed in', async () => {
     await loginPage.fillPassword(users.ogulikss.pass)
     await loginPage.clickSignIn()
-    expect(await loginPage.getErrorPresence()).toStrictEqual(false)
-    expect(await headerPage.getUserInvitation()).toStrictEqual(`Hello, ${users.ogulikss.firstName}`)
-    expect(await mainPage.getUserNavLinkText()).toStrictEqual(navLinkText)
+    expect(await loginPage.getErrorPresence(), 'log in should not be present').toStrictEqual(false)
+    expect(await headerPage.getUserInvitation(), 'User invitation should be present').toStrictEqual(`Hello, ${users.ogulikss.firstName}`)
+    expect(await mainPage.getUserNavLinkText(), 'User navigation link should be present').toStrictEqual(navLinkText)
   })
 })
