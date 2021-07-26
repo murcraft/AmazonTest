@@ -11,7 +11,6 @@ export default class AccountPage extends BasePage {
 
   constructor (page) {
     super(page)
-    this.page = page
   }
 
   async getAccountReferences () {

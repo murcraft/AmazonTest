@@ -13,7 +13,6 @@ export default class HeaderPage extends BasePage {
 
   constructor (page) {
     super(page)
-    this.page = page
   }
 
   async clickLogin () {

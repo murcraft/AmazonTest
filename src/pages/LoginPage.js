@@ -16,7 +16,6 @@ export default class LoginPage extends BasePage {
 
   constructor (page) {
     super(page)
-    this.page = page
   }
 
   async fillUsername (username) {
