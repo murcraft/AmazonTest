@@ -1,4 +1,4 @@
-import EnvData from '../../testdata/EnvData'
+import EnvData from '../lib/EnvData'
 import LoggerHelper from '../lib/Logger'
 import DateHelper from '../lib/DateHelper'
 
