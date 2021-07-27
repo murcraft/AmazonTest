@@ -42,7 +42,10 @@ export default class BasePage {
     options = { timeout: WAIT_TIMEOUT, ...options }
     LoggerHelper.Debug(`Getting text of ${elem.description} by selector '${elem.selector}'`)
     try {
-      return await this.page.innerText(elem.selector, options)
+      await this.page.waitForSelector(elem.selector)
+      const text = await this.page.innerText(elem.selector, options)
+      LoggerHelper.Debug(`Text is: '${text}'`)
+      return text
     } catch (err) {
       throw new Error(`Element '${elem.selector}' is not found. Details: ${err.message}`)
     }
@@ -51,6 +54,7 @@ export default class BasePage {
   async getAllElementsText (elem, options = {}) {
     LoggerHelper.Debug(`Getting text of ${elem.description} elements by selector '${elem.selector}'`)
     try {
+      await this.page.waitForSelector(elem.selector)
       const elementsArr = await this.page.$$(elem.selector, options)
       const textArr = await Promise.all(elementsArr.map(elem => { return elem.innerText() }))
       LoggerHelper.Debug(`Text is: ${textArr}`)

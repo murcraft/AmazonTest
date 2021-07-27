@@ -4,8 +4,9 @@
   "description": "",
   "scripts": {
     "test": "jest",
-    "test-chrome": "jest --browserName=chromium --isHeadless=false",
-    "test-firefox": "jest --browserName=firefox --concurrency=2 --isHeadless=false"
+    "test-chrome": "jest --browserName=chromium --isHeadless=false --runInBand",
+    "test-firefox": "jest --browserName=firefox --concurrency=2 --isHeadless=false",
+    "test-specific": "jest FilterValidation.test.js"
   },
   "keywords": [],
   "author": "",

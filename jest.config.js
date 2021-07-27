@@ -5,5 +5,6 @@ module.exports = {
   testMatch: ['<rootDir>/tests/*.js'],
   maxConcurrency: EnvData.CONCURRENT_TESTS,
   bail: 1,
-  setupFilesAfterEnv: ['jest-expect-message']
+  setupFilesAfterEnv: ['jest-expect-message'],
+  testTimeout: 120000
 }

@@ -1,7 +1,7 @@
 export const users = {
   ogulikss: {
     username: 'ogulikss@gmail.com',
-    pass: 'testaccount2021',
+    pass: 'mytest1218@@@',
     firstName: 'Helen'
   }
 }
